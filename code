@@ -1,0 +1,35 @@
+import pyqrcode 
+from pyqrcode import QRCode
+
+import time
+import xlsxwriter
+
+import xlrd
+
+wo=xlrd.open_workbook("student.xlsx")
+sh=wo.sheet_by_index(0)
+l=[]
+for i in range(1,sh.nrows):
+    s=str(sh.cell_value(i,1))+str(sh.cell_value(i,2))
+    l.append(s)
+    print(s)
+print(l)
+
+localtime = time.asctime( time.localtime(time.time()) )
+print ("Local current time :", localtime)
+
+s = l[0]
+
+# Generate QR code
+url = pyqrcode.create(s) 
+  
+
+url.svg("myqr1.svg", scale = 8)
+url = pyqrcode.create(l[1]) 
+  
+
+url.svg("myqr2.svg", scale = 8)
+url = pyqrcode.create(l[2]) 
+  
+
+url.svg("myqr3.svg", scale = 8) 
